@@ -43,6 +43,7 @@ void iniciarBatalha(Dificuldade dificuldadeAtual, vector<Pokemon>pokemons) {
     }
 }   */
 
+}
 int calcularDano(const structPokemon& atacante, const structPokemon& defensor, const structAtaque& ataqueEscolhido) {
     return (ataqueEscolhido.poder * atacante.ataque / defensor.defesa);
 }
