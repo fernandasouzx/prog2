@@ -9,6 +9,8 @@ using namespace std;
 
 vector<Jogador> ranking;
 
+
+// funcao para criar ou listar jogadores
 string carregarJogadores()
 {
     int opcao;
@@ -62,6 +64,7 @@ string carregarJogadores()
     }
 }
 
+//funcao que carrega o ranking de um arquivo
     void carregarRanking()
     {
         ifstream arquivo("ranking.txt");
@@ -79,41 +82,52 @@ string carregarJogadores()
         arquivo.close();
     }
 
+    //funcao que salva o ranking em arquivo RANKING.TXT
     void salvarRanking()
     {
         ofstream arquivo("ranking.txt");
         for (const auto &jogador : ranking)
         {
+            cout << "Salvando jogador: " << jogador.nome << " com pontuação " << jogador.pontuacao << endl; // Mostra os dados de cada jogador
             arquivo << jogador.nome << " " << jogador.vitorias << " " << jogador.derrotas << " " << jogador.pontuacao << endl;
         }
         arquivo.close();
     }
 
-    void atualizarRanking(const string &nome, bool vitoria)
-    {
-        for (auto &jogador : ranking)
-        {
-            if (jogador.nome == nome)
-            {
-                if (vitoria)
-                {
-                    jogador.vitorias++;
-                    jogador.pontuacao += (dificuldadeAtual == DIFICIL) ? 30 : (dificuldadeAtual == MEDIO) ? 20
-                                                                                                          : 10;
-                }
-                else
-                {
-                    jogador.derrotas++;
-                }
-                return;
+    // função para atualizar vitórias, derrotas e pontuação de um jogador
+    void atualizarRanking(const string &nome, bool vitoria) {
+    int pontos = (dificuldadeAtual == DIFICIL) ? 30 : (dificuldadeAtual == MEDIO) ? 20 : 10;
+    bool encontrou = false;  // Verificar se o jogador já está no ranking
+
+    for (auto &jogador : ranking) {
+        if (jogador.nome == nome) {
+            encontrou = true;
+            if (vitoria) {
+                jogador.vitorias++;
+                jogador.pontuacao += pontos;
+                cout << "Vitória registrada para " << nome << ". Pontuação atualizada para " << jogador.pontuacao << endl;
+            } else {
+                jogador.derrotas++;
+                cout << "Derrota registrada para " << nome << endl;
             }
+            salvarRanking();  // Salva imediatamente após atualizar o jogador
+            return;
         }
-        // Adiciona novo jogador ao ranking caso não seja encontrado
-        Jogador novoJogador = {nome, vitoria ? 1 : 0, vitoria ? 0 : 1, vitoria ? (dificuldadeAtual == DIFICIL ? 30 : dificuldadeAtual == MEDIO ? 20
-                                                                                                                                               : 10)
-                                                                               : 0};
-        ranking.push_back(novoJogador);
     }
+
+    // Caso o jogador não esteja no ranking, adiciona um novo
+    if (!encontrou) {
+        Jogador novoJogador = {nome, vitoria ? 1 : 0, vitoria ? 0 : 1, vitoria ? pontos : 0};
+        ranking.push_back(novoJogador);
+        cout << "Novo jogador adicionado: " << nome << " com pontuação inicial " << novoJogador.pontuacao << endl;
+        salvarRanking();
+    }
+}
+
+    
+    
+    
+    // função para exibir o ranking final
     void exibirRanking()
     {
         if (ranking.empty())
