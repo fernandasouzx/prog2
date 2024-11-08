@@ -7,6 +7,7 @@ OBJS = main.o menu.o pokemon.o batalha.o jogador.o
 # Regra para gerar o executável
 batalhaPokemon: $(OBJS)
 	$(CXX) $(CXXFLAGS) -o $@ $(OBJS)
+	./batalhaPokemon
 
 # Regras para compilar os arquivos-objetos
 main.o: main.cc dificuldade.h
@@ -24,5 +25,5 @@ batalha.o: batalha.cc dificuldade.h
 jogador.o: jogador.cc dificuldade.h
 	$(CXX) $(CXXFLAGS) -c jogador.cc -o jogador.o
 
-clean: 
+clean:
 	rm -f *.o batalhaPokemon
