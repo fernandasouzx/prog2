@@ -4,6 +4,7 @@
 #include <vector>
 #include <string>
 #include "dificuldade.h"
+#include "pokemon.h"
 
 
 
@@ -12,7 +13,6 @@ extern Dificuldade dificuldadeAtual;
 
 // Declarações de funções
 void exibirMenu(vector<Pokemon>pokemons);
-void selecionarDificuldade();
 void exibirRanking();
 void sairDoJogo();
 

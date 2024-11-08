@@ -12,6 +12,8 @@ extern vector<Jogador> ranking;
 
 void exibirMenu(vector<Pokemon>pokemons) {
     int escolha = 0;
+    string jogador;
+    cout << dificuldadeAtual << endl;
 
     while (escolha != 4) {
         cout << "=== Menu Principal ===" << endl;
@@ -24,9 +26,8 @@ void exibirMenu(vector<Pokemon>pokemons) {
 
         switch (escolha) {
             case 1:
-                carregarJogadores();
+                jogador = carregarJogadores();
                 iniciarBatalha(dificuldadeAtual, pokemons); // Inicia a batalha com a dificuldade atual
-
                 break;
             case 2:
                 selecionarDificuldade(dificuldadeAtual); // Define a dificuldade do jogo
@@ -67,11 +68,12 @@ void selecionarDificuldade(Dificuldade& dificuldadeAtual) {
             break;
         default:
             cout << "Opção inválida. A dificuldade será mantida em: ";
-            if (dificuldadeAtual = FACIL) cout << "Fácil" << endl;
-            else if (dificuldadeAtual = MEDIO) cout << "Médio" << endl;
+            if (dificuldadeAtual == FACIL) cout << "Fácil" << endl;
+            else if (dificuldadeAtual == MEDIO) cout << "Médio" << endl;
             else cout << "Difícil" << endl;
             break;
     }
+
 }
 
 void sairDoJogo() {

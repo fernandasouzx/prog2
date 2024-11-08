@@ -44,7 +44,7 @@ string carregarJogadores()
                 cout << i + 1 << ". " << ranking[i].nome << endl;
             }
             cin >> opcao;
-            if (opcao > 0 && opcao <= ranking.size())
+            if (opcao > 0 && static_cast<size_t>(opcao) <= ranking.size())
             {
                 return ranking[opcao - 1].nome;
             }
@@ -55,7 +55,7 @@ string carregarJogadores()
                 return carregarJogadores();
             }
             break;
-    
+
         default:
             cout << "Opção inválida. Tente novamente." << endl;
         }

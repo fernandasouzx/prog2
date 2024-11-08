@@ -7,12 +7,13 @@ using namespace std;
 class Ataque {
 public:
     string nome;
-    string tipo;
+    string categoria;
     int poder;
-    int precisao;
+    float precisao;
+    string tipo;
 
-    Ataque(const string& nome, const string& tipo, int poder, int precisao)
-        : nome(nome), tipo(tipo), poder(poder), precisao(precisao) {}
+    Ataque(const string& nome, const string& categoria, int poder, float precisao, const string& tipo)
+        : nome(nome), categoria(categoria), poder(poder), precisao(precisao), tipo(tipo) {}
 };
 
 #endif // ATAQUE_H

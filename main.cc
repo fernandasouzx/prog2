@@ -10,10 +10,8 @@
 Dificuldade dificuldadeAtual = FACIL;
 
 int main() {
-
     vector<Pokemon> pokemons = carregarPokemons("pokemons.txt"); // carregando e alocando em um vetors os pokemons
     carregarRanking(); // Carrega o ranking quando iniciado o jogo
-    
     exibirMenu(pokemons); // Mostra o menu principal
     return 0;
 }
