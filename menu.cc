@@ -27,7 +27,7 @@ void exibirMenu(vector<Pokemon>pokemons) {
         switch (escolha) {
             case 1:
                 jogador = carregarJogadores();
-                iniciarBatalha(dificuldadeAtual, pokemons); // Inicia a batalha com a dificuldade atual
+                iniciarBatalha(dificuldadeAtual, pokemons, jogador); // Inicia a batalha com a dificuldade atual
                 break;
             case 2:
                 selecionarDificuldade(dificuldadeAtual); // Define a dificuldade do jogo

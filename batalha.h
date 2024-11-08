@@ -31,7 +31,7 @@ struct structPokemon {
 };
 
 // funçoes da batalha
-void iniciarBatalha(Dificuldade dificuldadeAtual, vector<Pokemon>pokemons);
+void iniciarBatalha(Dificuldade dificuldadeAtual, vector<Pokemon> pokemons, string nomeJogador);
 int calcularDano(const Pokemon& atacante, const Pokemon& defensor, const Ataque& ataqueEscolhido);
 void selecionarDificuldade(Dificuldade& dificuldadeAtual);
 

@@ -90,7 +90,7 @@ vector<Ataque> sortearAtaques(const Pokemon &pokemon, const vector<Ataque> &todo
     return ataquesEscolhidos;
 }
 
-void iniciarBatalha(Dificuldade dificuldadeAtual, vector<Pokemon> pokemons)
+void iniciarBatalha(Dificuldade dificuldadeAtual, vector<Pokemon> pokemons, string nomeJogador)
 {
     cout << "Iniciando a batalha..." << endl;
     srand(time(0));
@@ -217,6 +217,7 @@ void iniciarBatalha(Dificuldade dificuldadeAtual, vector<Pokemon> pokemons)
                             cout << "CPU não tem mais pokemons disponíveis!" << endl;
                             batalhaEmAndamento = false;
                             cout << "Você venceu!" << endl;
+                            atualizarRanking(nomeJogador, true);
                             break;
                         }
                     }
@@ -268,23 +269,33 @@ void iniciarBatalha(Dificuldade dificuldadeAtual, vector<Pokemon> pokemons)
                     bool encontrouProximo = false;
                     for (Pokemon &p : pokemonsJogador) {
                         if (p.hp > 0 && &p != pokemonAtualJogador) {
-                            cout << "Escolha seu próximo pokemon:" << endl;
-                            for (int i = 0; i < pokemonsJogador.size(); i++) {
-                                if (pokemonsJogador[i].hp > 0) {
-                                    cout << i + 1 << ". " << pokemonsJogador[i].nome << " (HP: " << pokemonsJogador[i].hp << ")" << endl;
+                            bool escolhaValida = false;
+                            while (!escolhaValida) {
+                                cout << "Escolha seu próximo pokemon:" << endl;
+                                for (int i = 0; i < pokemonsJogador.size(); i++) {
+                                    if (pokemonsJogador[i].hp > 0) {
+                                        cout << i + 1 << ". " << pokemonsJogador[i].nome << " (HP: " << pokemonsJogador[i].hp << ")" << endl;
+                                    }
+                                }
+                                int novoPokemon;
+                                cin >> novoPokemon;
+
+                                if (novoPokemon >= 1 && novoPokemon <= pokemonsJogador.size() && pokemonsJogador[novoPokemon-1].hp > 0) {
+                                    pokemonAtualJogador = &pokemonsJogador[novoPokemon - 1];
+                                    escolhaValida = true;
+                                    encontrouProximo = true;
+                                    break;
+                                } else {
+                                    cout << "Escolha inválida! Por favor, escolha um pokemon disponível." << endl;
                                 }
                             }
-                            int novoPokemon;
-                            cin >> novoPokemon;
-                            pokemonAtualJogador = &pokemonsJogador[novoPokemon - 1];
-                            encontrouProximo = true;
-                            break;
                         }
                     }
                     if (!encontrouProximo) {
                         cout << "Você não tem mais pokemons disponíveis!" << endl;
                         batalhaEmAndamento = false;
                         cout << "CPU venceu!" << endl;
+                        atualizarRanking(nomeJogador, false);
                         break;
                     }
                 }
